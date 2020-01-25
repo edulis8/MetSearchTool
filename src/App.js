@@ -1,12 +1,14 @@
 import React from 'react';
 import './App.css';
-import Pokedex from './Pokedex';
-import PokeGame from './PokeGame';
+// import Pokedex from './Pokedex';
+import './Pokedex.css';
+
+import MetSearchTool from './MetSearchTool';
 
 function App() {
   return (
     <div className="App">
-      <PokeGame />
+      <MetSearchTool />
     </div>
   );
 }

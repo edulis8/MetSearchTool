@@ -23,8 +23,8 @@
 }
 
 .Pokecard img {
-    width: 100px;
-    height: 100px;
+    width: 250px;
+    height: 250px;
     transition: all ease 800ms;
 }
 
