@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
-// import Pokedex from './Pokedex';
-import './Pokedex.css';
+import './Container.css';
 
 import MetSearchTool from './MetSearchTool';
 
