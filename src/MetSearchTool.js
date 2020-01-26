@@ -66,17 +66,15 @@ const MetSearchTool = () => {
                                 async response => {
                                     const objectData = await response.json();
                                     resultArtObjects.push(objectData);
-                                    console.log('pushing');
                                     setArtObjects([...resultArtObjects]);
                                 });
                         }
                     } else {
-                        console.log('No results from API');
+                        // if no results from the API, clear art objects
                         setArtObjects([]);
                     }
                 }
             });
-
     };
     return (
         <div className='Container'>
@@ -98,101 +96,6 @@ const MetSearchTool = () => {
 
         </div>
     )
-
 }
 
 export default MetSearchTool;
-
-// class MetSearchTool extends Component {
-//     constructor(props) {
-//         super(props);
-//         this.state = {
-//             artObjects: [],
-//             searchTerm: '',
-//             searching: false,
-//             dirty: false
-//         }
-//         this.handleSearchInputChanges = this.handleSearchInputChanges.bind(this);
-//         this.search = debounce(this.search, 300);
-//         const lastPromise = useRef();
-
-//     }
-//     // static defaultProps = {
-//     //     test: [
-//     //     ]
-//     // }
-//     handleSearchInputChanges(e) {
-//         const searchTerm = e.target.value;
-//         this.setState({ searchTerm, dirty: true, searching: true })
-//         // console.log(this.state.searchTerm);
-//         this.search(searchTerm);
-//     }
-//     search(searchTerm) {
-//         console.log('searchTerm state', this.state.searchTerm);
-//         console.log('searchTerm local', searchTerm);
-
-//         const currentPromise = Axios.get(`${MET_API_BASE}/search?q=${searchTerm}`)
-//             .then(async response => {
-//                 await delayRandomly();
-//                 // throwRandomly();
-//                 return response;
-//             });
-
-//         // store the promise to the ref
-//         lastPromise.current = currentPromise;
-
-//         currentPromise.then((response) => {
-//             if (currentPromise === lastPromise.current) {
-//                 // console.log(response.data.objectIDs.slice(0, 20));
-//                 // console.log(response.status, response.statusText);
-//                 console.log('RESPONSE', response);
-//                 if (response.data.objectIDs && response.data.total) {
-//                     for (let i = 0; i < 20; i++) {
-//                         const id = response.data.objectIDs[i];
-//                         Axios.get(`${MET_API_BASE}/artObjects/${id}`).then((response) => {
-//                             // console.log(idx, response.data);
-//                             const newObjects = [...this.state.artObjects, response.data];
-//                             // newObjects.push(response.data);
-//                             this.setState({ artObjects: newObjects.slice(0, 20), searching: false })
-//                             // break loop if search term changes
-//                         })
-//                     }
-//                 } else {
-//                     console.log('else')
-//                     this.setState({ artObjects: [], searching: false })
-//                 }
-//             }
-//             this.setState({ artObjects: [] })
-//         }, 
-//         e => {
-//             if (currentPromise === lastPromise.current) {
-//                 console.warn('fetch failure', e);
-//             }
-//         });
-//     }
-//     componentDidMount() {
-//         console.log('didMount');
-//     }
-//     render() {
-//         return (
-//             <div className='Pokedex'>
-//                 {/* <p>{this.state.artObjects.length}</p> */}
-//                 {/* <p>{this.state.searching.toString()}</p> */}
-
-//                 <input type="text" placeholder="Search the MET art collection..." onChange={this.handleSearchInputChanges} />
-//                 <div class="Pokedex-cards">
-//                     {this.state.artObjects.map(object =>
-//                         <div className='Pokedex-cards'>
-//                             <Pokecard {...object} />
-//                         </div>
-
-//                     )}
-//                     {!this.state.dirty && <p>Welcome. Search for art at the MET!</p>}
-//                     {this.state.dirty && !this.state.artObjects.length && !this.state.searching && <p>No results.</p>}
-//                     {this.state.searching && <p>Searching...</p>}
-//                 </div>
-//             </div>
-//         )
-//     }
-// }
-
