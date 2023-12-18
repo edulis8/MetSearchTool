@@ -1,4 +1,4 @@
-import React, { Component, useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import Card from './Card';
 
 const MET_API_BASE = 'https://collectionapi.metmuseum.org/public/collection/v1';
@@ -19,6 +19,8 @@ const MetSearchTool = () => {
     const lastAbortController = useRef();
     const [artObjects, setArtObjects] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
+    const [searching, setSearching] = useState(false);
+
 
     const debouncedSetSearchTerm = debounce(setSearchTerm, 400);
     const handleSearchInputChanges = (e) => {
@@ -26,9 +28,10 @@ const MetSearchTool = () => {
     };
 
     useEffect(() => {
-        if (!searchTerm) { 
-            return; 
+        if (!searchTerm) {
+            return;
         }
+        setSearching(true);
         // When a new request is going to be issued, the first thing to do is cancel the previous request
         if (lastAbortController.current) {
             lastAbortController.current.abort();
@@ -45,8 +48,9 @@ const MetSearchTool = () => {
             .then(response => {
                 if (abortController.signal.aborted) {
                     // cancel former API call by returning empty promise
-                    return new Promise(() => {});
+                    return new Promise(() => { });
                 }
+                setSearching(false);
                 return response;
             });
 
@@ -70,7 +74,8 @@ const MetSearchTool = () => {
                                 });
                         }
                     } else {
-                        // if no results from the API, clear art objects
+                        // if no results from the API, reset art objects
+                        // TODO resolve bug - if search term changes from valid to invalid quickly, valid objects are pushed into artObjects array after this reset 
                         setArtObjects([]);
                     }
                 }
@@ -79,8 +84,13 @@ const MetSearchTool = () => {
     return (
         <div className='Container'>
             <h1>Search the Metropolitan Museum of Art Collection</h1>
-            <input type="text" placeholder="Search the MET..." onChange={handleSearchInputChanges} />
-            <p>{searchTerm && `searching for: ${searchTerm}`}</p>
+            <input type="text" placeholder="Start Typing to Search the MET..." onChange={handleSearchInputChanges} />
+            <div className='Container-searching-text'>
+                <span>{searchTerm && `Searching for: ${searchTerm}`}</span>
+                {/* TODO: image spinner */}
+                <span>{searching && ` ...`}</span>
+            </div>
+
             <p>{searchTerm && `${artObjects.length} results`}</p>
             <div className="Container-cards">
                 {artObjects.map(object =>
@@ -88,12 +98,7 @@ const MetSearchTool = () => {
                         <Card {...object} />
                     </div>
                 )}
-                {/* {!this.state.dirty && <p>Welcome. Search for art at the MET!</p>} */}
-                {/* {this.state.dirty && !this.state.artObjects.length && !this.state.searching && <p>No results.</p>} */}
-                {/* {this.state.searching && <p>Searching...</p>} */}
-
             </div>
-
         </div>
     )
 }

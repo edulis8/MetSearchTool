@@ -2,14 +2,15 @@
     width: 300px;
     padding: 10px;
     margin: 1rem;
-    box-shadow: 7px 10px 12px -5px rgba(0,0,0,.56);
+    box-shadow: 7px 10px 12px -5px rgba(0, 0, 0, .56);
     text-align: center;
     background-color: #ffff;
-    border-radius: 3px;
+    border-radius: 8px;
 }
 
-.Card-data {
- font-size: 80%;
+.Card a:link, .Card a:visited {
+    color: black;
+    text-decoration: none;
 }
 
 .Card-image {
@@ -20,21 +21,58 @@
     background-color: #eceff1;
     border-radius: 3px;
     margin-bottom: 1rem;
+    position: relative;
+    display: inline-block;
 }
 
 .Card img {
-    width: 250px;
-    height: 250px;
+    width: 270px;
+    height: 270px;
     transition: all ease 800ms;
 }
 
 .Card img:hover {
-    transform: scale(1.25);
-    opacity: 0.6;
+    transform: scale(1.10);
+    opacity: 0.7;
 }
 
 .Card-title {
-    margin-bottom: 1rem; 
+    margin-bottom: 1rem;
     font-weight: bold;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
+    text-decoration: none;
+}
+
+.Card-subtitle {
+    font-size: 80%;
+}
+
+.Card-info {
+    display: none;
+}
+
+.show-info {
+    display: block;
+}
+
+.Card-image .Card-info {
+    box-shadow: 7px 10px 12px -5px rgba(0, 0, 0, .56);
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    z-index: 999;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    bottom: 0%;
+    text-align: center;
+    transition: all ease 800ms;
+}
+
+.Card-info:hover {
+    transform: scale(1.05);
+}
+
+.Card-info-snippet {
+    color: white;
+    text-shadow: 1px 1px rgb(0, 0, 0);
 }

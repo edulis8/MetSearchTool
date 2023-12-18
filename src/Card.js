@@ -1,21 +1,29 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import './Card.css';
 
-class Card extends Component {
-  render() {
-    return (
-      <div className="Card" >
-        <h1 className="Card-title">{this.props.title}</h1>
-        <p className="Card-title">{this.props.artistDisplayBio}</p>
+const Card = (props) => {
+  const [showInfo, setShowInfo] = useState(false);
 
-        <div className="Card-image">
-          <a href={this.props.objectURL} target="_blank" rel="noopener noreferrer">
-            <img src={this.props.primaryImageSmall} alt={this.props.title} />
-          </a>
+  return (
+    <div className="Card" >
+      <a href={props.objectURL} target="_blank" rel="noopener noreferrer">
+        <h2 className="Card-title">{props.title}</h2>
+        <p className="Card-subtitle">{props.medium}</p>
+        <div
+          className="Card-image"
+          onMouseOver={() => setShowInfo(!showInfo)}
+          onMouseOut={() => setShowInfo(!showInfo)}
+        >
+          <img src={props.primaryImageSmall} alt={props.title} />
+          <div className={`Card-info ${showInfo ? "show-info" : ""}`}>
+            <p className="Card-info-snippet">Department: {props.department}</p>
+            <p className="Card-info-snippet">Date: {props.objectDate}</p>
+            <p className="Card-info-snippet">Artist: {props.artistDisplayName}</p>
+          </div>
         </div>
-      </div >
-    );
-  }
+      </a>
+    </div >
+  );
 }
 
 export default Card;

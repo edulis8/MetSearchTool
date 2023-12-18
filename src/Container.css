@@ -1,9 +1,30 @@
 .Container {
+    margin-top: 3rem;
     text-align: center;
 }
 .Container-cards {
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
+}
+
+.Container-searching-text {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Container input {
+    padding: 10px 15px;
+    width: 250px;
+    border-radius: 10px;
+    border: 1px solid slategrey
+}
+
+.loading {
+    width: 20px;
+    height: 20px;
+    margin-left: 20px;
 }
 
