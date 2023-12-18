@@ -1,7 +1,7 @@
 
 # BuildingConnected Frontend Challenge
 ## High-level overview of the way I structured the code:
-* Used React functional components and hooks (because these are new in React, and I wanted to learn them :)).
+* Used React functional components and hooks.
     * A Container component with the search input, also displaying the number of rendered results in real time.
     * Up to 20 Card components to display each art object from the API.
 * A call is made to query the user's search input from the MET API, which retrieves a list of art object ids.
